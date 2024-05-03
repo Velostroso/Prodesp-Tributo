@@ -26,13 +26,12 @@ WORKDIR /app
 # Configure OpenTelemetry with environment variables
 # PS: otlp is the protocol
 ENV OTEL_SERVICE_NAME prodesp-tributo
-ENV OTEL_EXPORTER_OTLP_ENDPOINT otel_namespace.local:4317
+ENV OTEL_EXPORTER_OTLP_ENDPOINT http://taxalb.elb.localhost.localstack.cloud:4317
 ENV OTEL_EXPORTER_OTLP_PROTOCOL grpc
 ENV OTEL_EXPORTER_OTLP_INSECURE true
 ENV OTEL_TRACES_EXPORTER otlp
 ENV OTEL_METRICS_EXPORTER otlp
 ENV OTEL_LOGS_EXPORTER otlp
-ENV JAVA_TOOL_OPTIONS /app/opentelemetry-javaagent.jar
 
 # Copy the built artifact from the previous stage
 COPY --from=build /app/target/*.jar app.jar
